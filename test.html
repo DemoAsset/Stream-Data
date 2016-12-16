@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<link rel="stylesheet" type="text/css" href="css/default.css">-->
+		<script src="lib/knockout-3.4.1.js"></script>
+	</head>
+	<body>
+
+		<script src="app/viewmodels/datamodel.js"></script>
+
+		<div id="header">
+			<h2>Event Generator</h2>
+		</div>
+		<div id="content">
+			<div id="controls">
+
+				<!--<p>First name: <span data-bind="text: firstName"></span></p>-->
+
+				<input type="text" data-bind="textinput: amount">
+				</input>
+
+				<table>
+					<tr>
+						<td>Accounts <select data-bind="options: accountsList"></select></td><td></td><td></td>
+					</tr>
+				</table>
+			</div>
+
+			<div>
+				<span>Accounts Number :
+					<select data-bind = "foreach: accounts" >
+						<option data-bind = "text: getAccountString"></option>
+					</select> </span>
+			</div>
+
+			<div id="response">
+
+			</div>
+		</div>
+
+		<script>
+			ko.applyBindings(new appViewModel());
+		</script>
+
+	</body>
+</html>
