@@ -5,12 +5,15 @@
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-		<title>testindex</title>
-		<meta name="description" content="">
-		<meta name="author" content="mishp3">
+		<title>Transactoin Generator</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="lib/knockout-3.4.1.js"></script>
+		<!--<script>
+		streamData = function(){
+		var temp = 1234;
+		alert(temp);
+		};
+		</script> -->
 	</head>
 
 	<body>
@@ -19,16 +22,35 @@
 				<h1 align="center">Credit Card Transaction Generator</h1>
 			</header>
 
-			<input type="text" data-bind="textinput: amount">
-			</input>
-
 			<div>
-				<span>Accounts Number :
-					<select data-bind = "foreach: accounts" >
-						<option data-bind = "text: getAccountString"></option>
-					</select> </span>
-			</div>
+				<span>Accounts Number : <select data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select>
+					<br>
+					<br>
+					<input type ="checkbox" data-bind ="checked: randomAccounts">
+					Include other accounts at random</input> <p data-bind = "text: selectedAccount"></p> </span>
+				<br>
+				<br>
 
+				<span>Merchant Category Code : <select data-bind = "options: merchantCode, optionsText: 'getMCCString',optionsValue:'mcc', value: selectedMCC, optionsCaption: 'Choose a merchant category code...'" ></select>
+					<br>
+					<br>
+					<input type ="checkbox" data-bind ="checked: randomMCC">
+					Include other MCC's at random</input> <p data-bind = "text: selectedMCC"></p> </span>
+			</div>
+			<div>
+				<span> Minimum Transaction Amount:
+					<input type = "number" data-bind = "textInput: minTransAmount"/>
+					<br>
+					<br>
+					Maximum Transaction Amount:
+					<input type = "number" data-bind = "textInput: maxTransAmount"/>
+					<br>
+					<br>
+				</span>
+			</div>
+			<button data-bind= "text: buttonText, click: streamData" ></button>
+			<span>Temporay List for testing:<select multiple="multiple" , data-bind = "options: tempList"></select>
+			</span>
 		</div>
 		<script src="app/viewmodels/datamodel.js"></script>
 	</body>
