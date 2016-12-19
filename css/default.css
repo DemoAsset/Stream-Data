@@ -1,0 +1,26 @@
+.leftPanel {
+	float: left;
+	width: 50%;
+	height: 80%;
+}
+.rightPanel {
+	float: left;
+	width: 50%;
+	text-align: center;
+	height: 80%;
+}
+.bottomPanel {
+	position: fixed;
+	text-align: center;
+	top:50%;
+	width: 100%;
+}
+
+table{
+	width:100%;
+}
+table tbody 
+{
+   overflow: auto;
+   height: 100px;
+}

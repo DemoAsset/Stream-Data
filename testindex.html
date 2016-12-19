@@ -8,12 +8,8 @@
 		<title>Transactoin Generator</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="lib/knockout-3.4.1.js"></script>
-		<!--<script>
-		streamData = function(){
-		var temp = 1234;
-		alert(temp);
-		};
-		</script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/default.css">
 	</head>
 
 	<body>
@@ -22,22 +18,22 @@
 				<h1 align="center">Credit Card Transaction Generator</h1>
 			</header>
 
-			<div>
-				<span>Accounts Number : <select data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select>
-					<br>
-					<br>
-					<input type ="checkbox" data-bind ="checked: randomAccounts">
-					Include other accounts at random</input> <p data-bind = "text: selectedAccount"></p> </span>
+			<div class = "leftPanel">
+				Accounts Number : <select data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select>
+				<br>
+				<br>
+				<input class ="checkbox" type ="checkbox" data-bind ="checked: randomAccounts">
+				Include other accounts at random</input>
 				<br>
 				<br>
 
-				<span>Merchant Category Code : <select data-bind = "options: merchantCode, optionsText: 'getMCCString',optionsValue:'mcc', value: selectedMCC, optionsCaption: 'Choose a merchant category code...'" ></select>
-					<br>
-					<br>
-					<input type ="checkbox" data-bind ="checked: randomMCC">
-					Include other MCC's at random</input> <p data-bind = "text: selectedMCC"></p> </span>
+				Merchant Category Code : <select data-bind = "options: merchantCode, optionsText: 'getMCCString',optionsValue:'mcc', value: selectedMCC, optionsCaption: 'Choose a merchant category code...'" ></select>
+				<br>
+				<br>
+				<input class="checkbox" type = "checkbox" data-bind ="checked: randomMCC">
+				Include other MCC's at random</input>
 			</div>
-			<div>
+			<div class = "rightPanel">
 				<span> Minimum Transaction Amount:
 					<input type = "number" data-bind = "textInput: minTransAmount"/>
 					<br>
@@ -48,9 +44,25 @@
 					<br>
 				</span>
 			</div>
-			<button data-bind= "text: buttonText, click: streamData" ></button>
-			<span>Temporay List for testing:<select multiple="multiple" , data-bind = "options: tempList"></select>
-			</span>
+			<div class = "bottomPanel">
+				<button data-bind= "text: buttonText, click: streamData"></button>
+				<br>
+				<br>
+				<table>
+					<thead>
+						<th> Account Number </th>
+						<th> Transaction Amount </th>
+						<th> Merchant Category Code </th>
+						<th> Transaction Sequence </th>
+					</thead>
+					<tbody data-bind ="foreach: transactionList">
+						<td data-bind="text: CCT_ACCTNBR"></td>
+						<td data-bind="text: CCT_TRANAMOUNT"></td>
+						<td data-bind="text: CCT_MERCHANTCATEGORYCODE"></td>
+						<td data-bind="text: CCT_TRANSEQ"></td>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<script src="app/viewmodels/datamodel.js"></script>
 	</body>
