@@ -2,7 +2,7 @@
  * @author mishp3
  */
 
-var sendData,worker,tempList,transactionList, url = 'http://10.61.9.168:7003/stream/CreditCardTransactionStream';
+var sendData,transactionList, url = 'http://10.61.9.168:7003/stream/CreditCardTransactionStream',id = 100;
 
 function account(accountNumber, name) {
 	var self = this;
@@ -57,13 +57,21 @@ function sendAjaxRequest(data){
 		    console.log(e);	
 		    //var trans = JSON.parse(data);
 		    //transactionList.push(new transactionData(trans.selectedAccount,trans.transAmount,trans.selectedMCC,trans.transID));
-		    transactionList.push(data);
+		    transactionList.unshift(data);
 		}
 	}); 
+}
+function formatCurrency(value) {
+    return "$" + value;
+}
+function clearTransactions() {
+  transactionList.removeAll();
 }
 function appViewModel(){
 	var self = this;
 	transactionList = ko.observableArray();
+	
+	//List of accounts
 	self.accounts = ko.observableArray([
 					 new account(5989919999999990, "Shea Parker"),
 					 new account(9999999975, "Shea Parker"),
@@ -72,6 +80,8 @@ function appViewModel(){
 					 new account(4659984848, "Barbara Stockton")
 					]);
    self.selectedAccount =ko.observable("");
+   
+   //List of merchant category codes
    self.merchantCode= ko.observableArray([
    	          new merchantCategoryCode(5198, "Home Improvement"),
    	          new merchantCategoryCode(5200, "Home Improvement"),
@@ -81,12 +91,16 @@ function appViewModel(){
    	          new merchantCategoryCode(5541, "Gas Station"),
    	          new merchantCategoryCode(5542, "Gas Station")
    ]);
+   
+   //List of other account which will picked randomly
    self.randomAccountsList = [
                   new account(9999999998, "Skyla Anderson"),
                   new account(9999999992, "Talia Green"),
                   new account(9999999993, "Talia Green"),
                   new account(9999999990, "Skyla Anderson")     
    ];
+   
+   //List of other merchant category code which will picked randomly
    self.randomMerchantCode = [
                   new merchantCategoryCode(1712, "Random"),
                   new merchantCategoryCode(5073, "Random"),
@@ -121,9 +135,8 @@ function appViewModel(){
     *  Helper function to create JSON object and send it to the server. 
     */
    self.sendStream = function(){
-   
+
    sendData = setInterval(function(){
-   	     			//tempList.push("Three");
    	     			var data = createTransData();
    	     			sendAjaxRequest(data);
    	     			},2000);
@@ -138,10 +151,10 @@ function appViewModel(){
    
    
     /**
-     * Creates a JSON representation for this view Model. 
+     * Creates a Transaction object. 
      */
 	function createTransData() {
-		var transAmount = Math.floor(Math.random() * (self.maxTransAmount() - self.minTransAmount() + 1) + self.minTransAmount());
+		var transAmount = Math.random() * (self.maxTransAmount() - self.minTransAmount() + 1) + self.minTransAmount();
 		var ranAccIndex,ranMCCIndex;
 
 		if (self.randomAccounts())
@@ -163,10 +176,9 @@ function appViewModel(){
 		else
 			jsonObj.selectedMCC = self.selectedMCC();
 
-		jsonObj.transAmount = transAmount;                                    //Stores Transaction Amount in JSON
+		jsonObj.transAmount = transAmount.toFixed(2);                                    //Stores Transaction Amount in JSON
 		
-		//Update to generate random tansaction id
-		jsonObj.transID = 100;												  //Stores Unique Transaction ID in JSON 
+		jsonObj.transID = id++;												  //Stores Unique Transaction ID in JSON 
 		
 		
 		//return JSON.stringify(jsonObj);
