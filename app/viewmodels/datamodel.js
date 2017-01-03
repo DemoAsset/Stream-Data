@@ -3,7 +3,7 @@
  */
 
 var sendData,transactionList;
-var url = 'http://10.60.213.33:7003/stream/CreditCardTransactionStream',id = 100;
+var url = '	http://10.61.9.168:7003/stream/CreditCardTransactionStream',id = 100;
 
 function account(accountNumber, name) {
 	var self = this;
@@ -170,7 +170,6 @@ function appViewModel(){
    self.randomMCC = ko.observable(false);
    self.selectedLocalCurr = ko.observable();
    self.selectedForeignCurr = ko.observable();
-   //self.foreign = self.selectedLocalCurr.symbol;
     /**
      * Creates a Transaction object. 
      */
