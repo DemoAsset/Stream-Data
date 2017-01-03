@@ -2,7 +2,8 @@
  * @author mishp3
  */
 
-var sendData,transactionList, url = 'http://10.61.9.168:7003/stream/CreditCardTransactionStream',id = 100;
+var sendData,transactionList;
+var url = 'http://10.60.213.33:7003/stream/CreditCardTransactionStream',id = 100;
 
 function account(accountNumber, name) {
 	var self = this;

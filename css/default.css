@@ -28,13 +28,13 @@
 .header{
 	height:20%;
 	padding-top:2px;
-	background-color:#00cccc;
+	background-color:#069FE1;
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05), 0px 20px 20px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.05);
 }
 .myButton {
 	width:20%;
 	height:10%;
-	background-color:#00cccc;
+	background-color:#069FE1;
 	border-radius:7px;
 	border:2px;
 	display:inline-block;
@@ -53,42 +53,22 @@
 	position:relative;
 	top:1px;
 }
-
 table.sortable span.sortarrow {
     color: black;
     text-decoration: none;
 }
-select{
+.dropdown-list{
 	position: relative;
     margin: 0 auto;
-    padding: 12px 15px;
+    padding: 5px 10px;
     
     /* Styles */
-    background: #fff;
+    //background-color: #D1E8F7;
     border-radius: 5px;
     box-shadow: 0 1px 0 rgba(0,0,0,0.2);
     cursor: pointer;
     outline: none;
-    transition: all 0.3s ease-out;
-}
-option {
-	position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-
-    /* Styles */
-    background: #fff;
-    border-radius: 0 0 5px 5px;
-    border: 1px solid rgba(0,0,0,0.2);
-    border-top: none;
-    border-bottom: none;
-    list-style: none;
-    transition: all 0.3s ease-out;
-
-    /* Hiding */
-    max-height: 0;
-    overflow: hidden;
+    transition: all 0.5s ease-out;
 }
 h1{
 	color:#FFFFFF;
@@ -99,7 +79,7 @@ table {
 	margin: 25px auto;
 	border-collapse: collapse;
 	border: 1px solid #eee;
-	border-bottom: 2px solid #00cccc;
+	border-bottom: 2px solid #069FE1;
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.05), 0px 20px 20px rgba(0, 0, 0, 0.05), 0px 30px 20px rgba(0, 0, 0, 0.05);
 }
 table tr:hover {
@@ -115,7 +95,7 @@ table th, table td {
 	border-collapse: collapse;
 }
 table th {
-	background: #00cccc;
+	background: #069FE1;
 	color: #fff;
 	text-transform: uppercase;
 	font-size: 12px;

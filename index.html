@@ -1,70 +1,94 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>New Web Project</title>
+		<meta charset="utf-8">
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Transaction Generator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="lib/knockout-3.4.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<!--<script src="lib/jquery.tablesorter.js"></script>
-		<script src="lib/jquery-latest.js"></script>-->
-		<script src="lib/sorttable.js"></script>
+		<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/default.css">
-
-		<script>
-		$(document).ready(function() {
-		$("table").tablesorter();
-		});
-		</script>
-		<!--<style>
-			table.sortable thead {
-				background-color: #eee;
-				color: #666666;
-				font-weight: bold;
-				cursor: default;
-			}
-		</style>-->
+		<script src="lib/sorttable.js"></script>
+		<!--<script>
+		function clear(){
+		alert("inside clear");
+		var table = document.getElementsByTagName('table');
+		table[0].tBodies[0].rows=[];
+		table[0].tBodies[0].rows.length = 0;
+		}
+		</script> -->
 	</head>
 
-	<body>
-		<table id="transTable" class="sortable">
-			<thead>
-				<tr>
-					<th>Last Name</th>
-					<th>First Name</th>
-					<th>Email</th>
-					<th>Due</th>
-					<th>Web Site</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Smith</td>
-					<td>John</td>
-					<td>jsmith@gmail.com</td>
-					<td>$50.00</td>
-					<td>http://www.jsmith.com</td>
-				</tr>
-				<tr>
-					<td>Bach</td>
-					<td>Frank</td>
-					<td>fbach@yahoo.com</td>
-					<td>$50.00</td>
-					<td>http://www.frank.com</td>
-				</tr>
-				<tr>
-					<td>Doe</td>
-					<td>Jason</td>
-					<td>jdoe@hotmail.com</td>
-					<td>$100.00</td>
-					<td>http://www.jdoe.com</td>
-				</tr>
-				<tr>
-					<td>Conway</td>
-					<td>Tim</td>
-					<td>tconway@earthlink.net</td>
-					<td>$50.00</td>
-					<td>http://www.timconway.com</td>
-				</tr>
-			</tbody>
-		</table>
+	<body style="overflow-y: auto; height:100%">
+
+		<header>
+			<div class="header">
+				<h1 align="center">Credit Card Transaction Generator</h1>
+			</div>
+		</header>
+		<div class="topPanel">
+			<div class = "leftPanel">
+				<span class = "textSpan">Account Number :</span>
+				<span style="padding-left: 8%"><select class="dropdown-list" data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select></span>
+				<br>
+				<br>
+				<input class ="checkbox"  type ="checkbox" data-bind ="checked: randomAccounts">
+				Include other accounts at random</input>
+				<br>
+				<br>
+				<br>
+
+				<span class = "textSpan">Merchant Category Code : </span><select class="dropdown-list" data-bind = "options: merchantCode, optionsText: 'getMCCString',optionsValue:'mcc', value: selectedMCC, optionsCaption: 'Choose a merchant category code...'" ></select>
+				<br>
+				<br>
+				<input class="checkbox" type = "checkbox" data-bind ="checked: randomMCC">
+				Include other MCC's at random</input>
+			</div>
+			<div class = "rightPanel">
+				<span class = "textSpan">Minimum Transaction Amount:</span>
+				<input type = "number" data-bind = "textInput: minTransAmount"/>
+				<br>
+				<br>
+				<br>
+				<span class = "textSpan">Maximum Transaction Amount:</span>
+				<input type = "number" data-bind = "textInput: maxTransAmount"/>
+				<br>
+				<br>
+			</div>
+		</div>
+
+		<div class = "bottomPanel">
+			<button class ="myButton", data-bind= "text: buttonText, click: streamData"></button>
+			<button class ="myButton" data-bind= "click: clearTransactions">
+				Reset
+			</button>
+			<br/>
+			<br/>
+			<br/>
+			<div style="overflow-y: scroll; height:380px">
+				<table id="transTable" class="stable">
+					<thead>
+						<tr>
+							<th> Transaction Sequence </th>
+							<th> Account Number </th>
+							<th> Transaction Amount </th>
+							<th> Merchant Category Code </th>
+						</tr>
+					</thead>
+					<tbody data-bind ="foreach: transactionList">
+						<tr>
+							<td data-bind="text: CCT_TRANSEQ"></td>
+							<td data-bind="text: CCT_ACCTNBR"></td>
+							<td data-bind="text: formatCurrency(CCT_TRANAMOUNT)"></td>
+							<td data-bind="text: CCT_MERCHANTCATEGORYCODE"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script src="app/viewmodels/datamodel.js"></script>
 	</body>
 </html>
