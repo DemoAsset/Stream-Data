@@ -57,6 +57,17 @@
 				<input type = "number" data-bind = "textInput: maxTransAmount"/>
 				<br>
 				<br>
+				<br>
+				<span class = "textSpan">Local Transaction Currency:</span>
+				<select class="dropdown-list" data-bind = "options: currency, optionsText:'currency', value: selectedLocalCurr, optionsCaption: 'Choose local transaction currency...'" ></select>
+				<br>
+				<!--<p data-bind = "text: selectedLocalCurr.symbol"></p>-->
+				<br>
+				<br>
+				<span class = "textSpan">Foreign Transaction Currency:</span>
+				<select class="dropdown-list" data-bind = "options: currency, optionsValue:'currency', value: selectedForeignCurr, optionsCaption: 'Choose foreign transaction currency...'" ></select>
+				<br>
+				<br>
 			</div>
 		</div>
 
@@ -82,7 +93,7 @@
 						<tr>
 							<td data-bind="text: CCT_TRANSEQ"></td>
 							<td data-bind="text: CCT_ACCTNBR"></td>
-							<td data-bind="text: formatCurrency(CCT_TRANAMOUNT)"></td>
+							<td data-bind="text: formatCurrency(CCT_TRANAMOUNT,CCT_POSTEDCURRISO)"></td>
 							<td data-bind="text: CCT_MERCHANTCATEGORYCODE"></td>
 						</tr>
 					</tbody>

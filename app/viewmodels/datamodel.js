@@ -29,13 +29,21 @@ function merchantCategoryCode(mcc, storeName) {
 		});
 }
 
-function transactionData(accountNumber, amount, mcc, transID){
+function transactionData(accountNumber, amount, mcc, transID, localCurr, foreignCurr){
 	var self = this;
 	self.CCT_ACCTNBR = accountNumber;
 	self.CCT_TRANAMOUNT = amount;
 	self.CCT_MERCHANTCATEGORYCODE = mcc;
 	self.CCT_TRANSEQ = transID;
+	self.CCT_TRANCURRISO = localCurr;
+	self.CCT_POSTEDCURRISO = foreignCurr;
 	//self.dateTimeStamp = dateTimeStamp;
+}
+
+function Currency(currency,symbol){
+	var self = this;
+	self.currency = currency;
+	self.symbol = symbol;
 }
 
 function sendAjaxRequest(data){
@@ -62,8 +70,12 @@ function sendAjaxRequest(data){
 		}
 	}); 
 }
-function formatCurrency(value) {
-    return "$" + value;
+function formatCurrency(value,curr) {
+    //return "€" + value;
+    var currency = curr.toString();
+    var val = value;
+    var res = currency.concat(" ").concat(val);
+    return res;
 }
 function clearTransactions() {
   transactionList.removeAll();
@@ -108,6 +120,13 @@ function appViewModel(){
                   new merchantCategoryCode(1110, "Random"),
                   new merchantCategoryCode(1111, "Random")
    ];
+   
+   self.currency = [
+   	new Currency("USD","$"),
+   	new Currency("EUR","€"),
+   	new Currency("INR","₹"),
+   ];
+   
    self.buttonText = ko.observable("Start");
    
    /**
@@ -149,8 +168,9 @@ function appViewModel(){
    self.maxTransAmount = ko.observable(1000);
    self.randomAccounts = ko.observable(false);
    self.randomMCC = ko.observable(false);
-   
-   
+   self.selectedLocalCurr = ko.observable();
+   self.selectedForeignCurr = ko.observable();
+   //self.foreign = self.selectedLocalCurr.symbol;
     /**
      * Creates a Transaction object. 
      */
@@ -183,7 +203,7 @@ function appViewModel(){
 		
 		
 		//return JSON.stringify(jsonObj);
-		return new transactionData(jsonObj.selectedAccount,jsonObj.transAmount,jsonObj.selectedMCC, jsonObj.transID);
+		return new transactionData(jsonObj.selectedAccount,jsonObj.transAmount,jsonObj.selectedMCC, jsonObj.transID , self.selectedLocalCurr(), self.selectedForeignCurr());
 	}; 
 }
 ko.applyBindings(appViewModel);
