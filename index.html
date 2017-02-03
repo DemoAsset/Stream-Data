@@ -9,20 +9,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="lib/knockout-3.4.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/default.css">
 		<script src="lib/sorttable.js"></script>
-		<!--<script>
-		function clear(){
-		alert("inside clear");
-		var table = document.getElementsByTagName('table');
-		table[0].tBodies[0].rows=[];
-		table[0].tBodies[0].rows.length = 0;
-		}
-		</script> -->
 	</head>
 
-	<body style="overflow-y: auto; height:100%">
+	<body style="overflow-y: auto;">
 
 		<header>
 			<div class="header">
@@ -30,9 +21,9 @@
 			</div>
 		</header>
 		<div class="topPanel">
-			<div class = "leftPanel">
+			<div  class = "leftPanel">
 				<span class = "textSpan">Account Number :</span>
-				<span style="padding-left: 8%"><select class="dropdown-list" data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select></span>
+				<span style="padding-left: 5%"><select class="dropdown-list" data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select></span>
 				<br>
 				<br>
 				<input class ="checkbox"  type ="checkbox" data-bind ="checked: randomAccounts">

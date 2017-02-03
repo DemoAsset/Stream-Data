@@ -9,20 +9,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="lib/knockout-3.4.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"> </script>
+		<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/default.css">
 		<script src="lib/sorttable.js"></script>
-		<!--<script>
-		function clear(){
-			alert("inside clear");
-			var table = document.getElementsByTagName('table');
-			table[0].tBodies[0].rows=[];
-			table[0].tBodies[0].rows.length = 0;
-		}
-		</script> -->
 	</head>
 
-	<body style="overflow-y: auto; height:100%">
+	<body style="overflow-y: auto;">
 
 		<header>
 			<div class="header">
@@ -31,15 +23,17 @@
 		</header>
 		<div class="topPanel">
 			<div class = "leftPanel">
-				<span class = "textSpan">Account Number :</span><select data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select>
+				<span class = "textSpan">Account Number :</span>
+				<span style="padding-left: 8%"><select class="dropdown-list" data-bind = "options: accounts, optionsText: 'getAccountString',optionsValue:'accountNumber', value: selectedAccount, optionsCaption: 'Choose an account...' " ></select></span>
 				<br>
 				<br>
-				<input class ="checkbox" type ="checkbox" data-bind ="checked: randomAccounts">
+				<input class ="checkbox"  type ="checkbox" data-bind ="checked: randomAccounts">
 				Include other accounts at random</input>
 				<br>
 				<br>
+				<br>
 
-				<span class = "textSpan">Merchant Category Code : </span><select data-bind = "options: merchantCode, optionsText: 'getMCCString',optionsValue:'mcc', value: selectedMCC, optionsCaption: 'Choose a merchant category code...'" ></select>
+				<span class = "textSpan">Merchant Category Code : </span><select class="dropdown-list" data-bind = "options: merchantCode, optionsText: 'getMCCString',optionsValue:'mcc', value: selectedMCC, optionsCaption: 'Choose a merchant category code...'" ></select>
 				<br>
 				<br>
 				<input class="checkbox" type = "checkbox" data-bind ="checked: randomMCC">
@@ -50,17 +44,30 @@
 				<input type = "number" data-bind = "textInput: minTransAmount"/>
 				<br>
 				<br>
+				<br>
 				<span class = "textSpan">Maximum Transaction Amount:</span>
 				<input type = "number" data-bind = "textInput: maxTransAmount"/>
 				<br>
 				<br>
-
+				<br>
+				<span class = "textSpan">Local Transaction Currency:</span>
+				<select class="dropdown-list" data-bind = "options: currency, optionsValue:'currency', value: selectedLocalCurr, optionsCaption: 'Choose local transaction currency...'" ></select>
+				<br>
+				<!--<p data-bind = "text: selectedLocalCurr.symbol"></p>-->
+				<br>
+				<br>
+				<span class = "textSpan">Foreign Transaction Currency:</span>
+				<select class="dropdown-list" data-bind = "options: currency, optionsValue:'currency', value: selectedForeignCurr, optionsCaption: 'Choose foreign transaction currency...'" ></select>
+				<br>
+				<br>
 			</div>
 		</div>
 
 		<div class = "bottomPanel">
 			<button class ="myButton", data-bind= "text: buttonText, click: streamData"></button>
-			<button class ="myButton" data-bind= "click: clearTransactions">Reset</button>
+			<button class ="myButton" data-bind= "click: clearTransactions">
+				Reset
+			</button>
 			<br/>
 			<br/>
 			<br/>
@@ -78,14 +85,13 @@
 						<tr>
 							<td data-bind="text: CCT_TRANSEQ"></td>
 							<td data-bind="text: CCT_ACCTNBR"></td>
-							<td data-bind="text: formatCurrency(CCT_TRANAMOUNT)"></td>
+							<td data-bind="text: formatCurrency(CCT_TRANAMOUNT,CCT_POSTEDCURRISO)"></td>
 							<td data-bind="text: CCT_MERCHANTCATEGORYCODE"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-
 		<script src="app/viewmodels/datamodel.js"></script>
 	</body>
 </html>

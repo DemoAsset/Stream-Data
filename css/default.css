@@ -1,8 +1,9 @@
 .topPanel{
-	width:90%;
+	<!--width:90%;-->
 	padding-left:5%;
 	padding-top:5%;
-	height: 80%;
+	margin-left:15%; 
+    <!--height: 80%;-->
 	font-family: 'Arial';
 }
 .leftPanel {
@@ -12,8 +13,7 @@
 .rightPanel {
 	float: right;
 	width: 50%;
-	
-	text-align: right;
+	text-align: left;
 }
 .bottomPanel {
 	position: relative;
@@ -21,6 +21,7 @@
 	margin-top:15%;
 	height: 300px;
 	width: 100%;
+	clear:both;
 }
 .textSpan{
 	font-size:larger;
@@ -89,7 +90,7 @@ table tr:hover td {
 	background: #f4f4f4;
 }
 table th, table td {
-	color: #999;
+	color: #555;
 	border: 1px solid #eee;
 	padding: 12px 35px;
 	border-collapse: collapse;
