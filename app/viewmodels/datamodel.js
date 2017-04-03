@@ -198,8 +198,8 @@ function appViewModel(){
 		else
 			jsonObj.selectedMCC = self.selectedMCC();
 
-		jsonObj.transAmount = transAmount.toFixed(2);                                    //Stores Transaction Amount in JSON
-		
+		jsonObj.transAmount = parseFloat(transAmount).toFixed(2);                                    //Stores Transaction Amount in JSON
+		//jsonObj.transAmount = transAmount;                                  //Stores Transaction Amount in JSON
 		jsonObj.transID = id++;												  //Stores Unique Transaction ID in JSON 
 		
 		
